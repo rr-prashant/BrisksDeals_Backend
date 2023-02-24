@@ -1,0 +1,15 @@
+{% load account %}{% user_display user as user_display %}{% load i18n %}
+{% autoescape  off %}{% blocktrans with site_name=current_site.name %}
+Hello from Brisk Deals
+
+You're recieving this e-mail because user {{ user_display }} has given yours e-mail as an e-mail address to connect their account.
+
+To confirm your email, use token given below in your Brisk Deals app: 
+Token: {{ key }}
+
+If it is not {{ user_display }}, then please ignore this mail.{% endblocktrans %}{% endautoescape %}{% blocktrans with site_name=current_site.name %}
+
+Thank you from Brisk Deals!
+Brisk Deals
+{% endblocktrans %}
+
