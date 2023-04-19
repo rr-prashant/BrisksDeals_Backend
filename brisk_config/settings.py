@@ -19,6 +19,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -36,10 +37,13 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     'dj_rest_auth.registration',
     
     #local apps
-    'brisk_app1.apps.BriskApp1Config'
+    'brisk_app1.apps.BriskApp1Config',
+    
+    
 ]
 
 SITE_ID = 1
@@ -118,6 +122,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = 'static/'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -160,7 +167,8 @@ REST_AUTH_SERIALIZERS = {
 
 #serializers for rest auth registration
 REST_AUTH_REGISTER_SERIALIZERS = {
-    "REGISTER_SERIALIZER":"brisk_app1.serializers.NewRegisterSerializer"  #user registration data serialier
+    "REGISTER_SERIALIZER":"brisk_app1.serializers.NewRegisterSerializer",  #user registration data serialier
+    # "REGISTER_SERIALIZER": "rest_auth.social_serializers.SocialLoginSerializer"
 }
 
 #rest framework default authentication
@@ -168,5 +176,18 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication', 
+        #  'rest_framework_social_oauth2.authentication.SocialAuthentication'
     ]
 }
+
+# SOCIALACCOUNT_PROVIDERS = {
+#     'google' : {
+#         'SCOPE' : [
+#             'profile',
+#             'email',
+#         ],
+#         'AUTH_PARAMS' : {
+#             'access_type' : 'online',
+#         }
+#     }
+# }
